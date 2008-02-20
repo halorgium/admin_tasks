@@ -15,7 +15,8 @@ Capistrano::Configuration.instance(:must_exist).load do
   namespace :nginx do
     task :setup do
       sudo <<-EOT
-        sh -c 'mkdir -p #{nginx_path} #{nginx_releases_path} && 
+        sh -c 'mkdir -p #{nginx_path} #{nginx_releases_path} #{nginx_path}/custom && 
+          touch #{nginx_path}/custom/blank.conf && 
           chown -R admin #{nginx_path}/releases && 
           ln -sf #{current_nginx_path}/nginx.conf #{nginx_path}/nginx.conf && 
           ln -sf #{current_nginx_path}/servers #{nginx_path}/servers && 
